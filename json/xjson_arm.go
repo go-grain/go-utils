@@ -1,15 +1,14 @@
+//go:build arm
+
 package xjson
 
 import (
-	"errors"
-	"github.com/bytedance/sonic"
+	"encoding/json"
 	"log"
 )
 
-type G map[string]any
-
-func Marshal(data any) []byte {
-	marshal, err := sonic.Marshal(data)
+func Marshal(data interface{}) []byte {
+	marshal, err := json.Marshal(data)
 	if err != nil {
 		log.Print(err)
 		return nil
@@ -17,11 +16,12 @@ func Marshal(data any) []byte {
 	return marshal
 }
 
-func Unmarshal(data []byte, v any) error {
+func Unmarshal(data []byte, v interface{}) error {
 	if len(data) == 0 {
 		return errors.New("value is empty")
 	}
-	err := sonic.Unmarshal(data, v)
+
+	err := json.Unmarshal(data, v)
 	if err != nil {
 		return err
 	}

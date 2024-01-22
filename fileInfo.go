@@ -13,7 +13,7 @@ const (
 	TB = 1 << (10 * iota)
 )
 
-func GetFileSizeIn(filePath string) (float64, error) {
+func GetFileSizeInfo(filePath string) (float64, error) {
 	fileInfo, err := os.Stat(filePath)
 	if err != nil {
 		return 0, fmt.Errorf("无法获取文件信息: %w", err)

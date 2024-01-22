@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// PathIsNotExist 路径不存在
 func PathIsNotExist(path string) bool {
 	f, err := os.Stat(path)
 	if os.IsNotExist(err) {
@@ -17,6 +18,7 @@ func PathIsNotExist(path string) bool {
 	}
 }
 
+// FileIsNotExist 文件不存在
 func FileIsNotExist(path string) bool {
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
@@ -26,7 +28,7 @@ func FileIsNotExist(path string) bool {
 	}
 }
 
-// ext 获取文件后缀
+// Ext  获取文件后缀
 func Ext(filename string) string {
 	index := strings.LastIndex(filename, ".")
 	if index == -1 || index == len(filename)-1 {

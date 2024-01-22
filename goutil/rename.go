@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// 修改文件后缀
+// RenameAllDirFileSuffix 修改文件后缀
 func RenameAllDirFileSuffix(path, oldSuffix, newSuffix string) {
 	ReadDir(path)
 	for _, file := range DirList {

@@ -22,7 +22,6 @@ func gitInit() {
 		fmt.Println(err)
 		return
 	}
-	add()
 }
 
 func add() {
@@ -34,11 +33,10 @@ func add() {
 		fmt.Println(err)
 		return
 	}
-	commit()
 }
 
-func commit() {
-	cmd := exec.Command("git", "commit", "-m", "init")
+func commit(commit string) {
+	cmd := exec.Command("git", "commit", "-m", commit)
 	cmd.Stdout = os.Stdout
 	cmd.Dir = dir
 	err := cmd.Run()

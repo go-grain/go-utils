@@ -24,7 +24,7 @@ func getSecretKey(secretKey string) []byte {
 	return []byte(secretKey)
 }
 
-// 生成token
+// GenerateToken 生成token
 func (j Jwt) GenerateToken(uid, role, secretKey string, exp int64) (tokenString string, err error) {
 	claim := Claims{
 		Uid:  uid,
@@ -39,14 +39,14 @@ func (j Jwt) GenerateToken(uid, role, secretKey string, exp int64) (tokenString 
 	return tokenString, err
 }
 
-// 获取秘钥
+// Secret 获取秘钥
 func Secret(secretKey string) jwt.Keyfunc {
 	return func(token *jwt.Token) (interface{}, error) {
 		return []byte(secretKey), nil // 这是我的secret
 	}
 }
 
-// 解析token 并验证是否有效
+// ParseToken 解析token 并验证是否有效
 func (j Jwt) ParseToken(tokenStr, secretKey string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenStr, &Claims{}, Secret(secretKey))
 	if err != nil {

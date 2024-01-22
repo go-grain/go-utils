@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	ReqOk ErrCode = 1000
+	ReqOk ErrCode = 2000
 )
 
 type ErrCode int
@@ -102,9 +102,13 @@ func (r *Response) Success(ctx *gin.Context) {
 			}
 		}
 	}
+
+	if r.Code == 0 {
+		r.Code = ReqOk
+	}
 	s := &Response{
 		IsSuccess: true,
-		Code:      ReqOk,
+		Code:      r.Code,
 		Message:   r.Message,
 		Data:      r.Data,
 		IV:        r.IV,
@@ -140,7 +144,9 @@ func (r *Response) Fail(ctx *gin.Context) {
 			}
 		}
 	}
-
+	if r.Code == 0 {
+		r.Code = 500
+	}
 	s := &Response{
 		IsSuccess: false,
 		Code:      r.Code,
